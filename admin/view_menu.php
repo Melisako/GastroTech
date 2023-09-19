@@ -1,5 +1,28 @@
 <?php
     require 'db.php';
+
+	$sql = "SELECT * FROM prova"; 
+
+$result = mysqli_query($con, $sql);
+
+if ($result) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        echo "<tr>";
+        echo "<td>" . $row["id"] . "</td>";
+        echo "<td>" . $row["emri"] . "</td>";
+        echo "<td>" . $row["mbiemri"] . "</td>";
+
+        echo "<td>
+                  <a href='edit-prova.php?id=".$row["id"]."' class='button'>Update</a>
+                  <a href='delete-prova.php?id=".$row["id"]."' class='button'>Delete</a>
+                  <a href='add-prova.php?id=".$row["id"]."' class='button'>Add</a>
+              </td>";
+        echo "</tr>";
+    }
+} else {
+    // Handle the case where the query failed
+    echo "Error executing the query: " . mysqli_error($con);
+}
 ?>
 
 <html>
